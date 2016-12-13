@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">AmsterQuest</string>
+    <string name="ticket_recognition_api_key">d7cf54362fbc5d6f74828e83f81bc33a47b6ee81</string>
+    <string name="quest_retriever_username">a59498fc-0121-404e-967f-ba4b981e672c</string>
+    <string name="quest_retriever_password">zenQOr8aJEaS</string>
+    <string name="quest_solr_cluster_id">sca41fad07_3820_45d5_ab7b_d5236ecef47f</string>
+    <string name="quest_ranker_id">766366x22-rank-979</string>
+    <string name="quest_collection_name">amsterquest_collection</string>
+    <string name="quest_conversation_username">8dec9199-10b4-4a5e-88ff-e627c584dd77</string>
+    <string name="quest_conversation_password">rA8rWbMJ1Wqe</string>
+    <string name="quest_conversation_workspace_id">8c66af2c-e920-4b6e-bfd8-c63a4bbb2d14</string>
+</resources>
