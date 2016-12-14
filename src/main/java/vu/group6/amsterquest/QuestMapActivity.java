@@ -24,6 +24,7 @@ public class QuestMapActivity extends AppCompatActivity {
     private IMapController mapController;
     private List<QuestMarker> questMarkers;
     private ItemizedIconOverlay<QuestMarker> QuestMarkersOverlay;
+    private ArrayList<Parcelable> quests;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,9 @@ public class QuestMapActivity extends AppCompatActivity {
         questMarkers = new ArrayList<QuestMarker>();
 
         // get quests
+        quests = getIntent().getParcelableArrayListExtra("quests");
+        if (quests == null)
+            quests = savedInstanceState.getParcelableArrayList("quests");
         for (Parcelable quest : getIntent().getParcelableArrayListExtra("quests")) {
             questMarkers.add(new QuestMarker((Quest) quest));
         }
@@ -73,9 +77,15 @@ public class QuestMapActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == ChatActivity.REQUEST_QUEST) {
+        if (requestCode == ChatActivity.REQUEST_QUEST && data != null) {
             setResult(ChatActivity.REQUEST_QUEST, data);
             finish();
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList("quests", quests);
+        super.onSaveInstanceState(outState);
     }
 }
