@@ -1,0 +1,34 @@
+
+username:
+a59498fc-0121-404e-967f-ba4b981e672c
+
+password:
+zenQOr8aJEaS
+
+solr_cluster_id:
+sca41fad07_3820_45d5_ab7b_d5236ecef47f
+
+ranker_id:
+766366x22-rank-979
+
+curl -i -X DELETE -u "a59498fc-0121-404e-967f-ba4b981e672c":"zenQOr8aJEaS" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/sca41fad07_3820_45d5_ab7b_d5236ecef47f"
+curl -X POST -u "a59498fc-0121-404e-967f-ba4b981e672c":"zenQOr8aJEaS" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters" -d ""
+
+curl -u "a59498fc-0121-404e-967f-ba4b981e672c":"zenQOr8aJEaS" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/sca41fad07_3820_45d5_ab7b_d5236ecef47f"
+
+curl -X POST -H "Content-Type: application/zip" -u "a59498fc-0121-404e-967f-ba4b981e672c":"zenQOr8aJEaS" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/sca41fad07_3820_45d5_ab7b_d5236ecef47f/config/amsterquest_config" --data-binary @C://Users/Klaas/Downloads/amsterquest-solr-config.zip
+curl -X POST -u "a59498fc-0121-404e-967f-ba4b981e672c":"zenQOr8aJEaS" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/sca41fad07_3820_45d5_ab7b_d5236ecef47f/solr/admin/collections" -d "action=CREATE&name=amsterquest_collection&collection.configName=amsterquest_config"
+curl -X POST -H "Content-Type: application/json" -u "a59498fc-0121-404e-967f-ba4b981e672c":"zenQOr8aJEaS" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/sca41fad07_3820_45d5_ab7b_d5236ecef47f/solr/amsterquest_collection/update" --data-binary @C://Users/Klaas/Downloads/amsterquest-data.json
+
+activate py27
+python C://Users/Klaas/Downloads/train.py -u "a59498fc-0121-404e-967f-ba4b981e672c":"zenQOr8aJEaS" -i C://Users/Klaas/Downloads/amsterquest-gt.csv -c sca41fad07_3820_45d5_ab7b_d5236ecef47f -x amsterquest_collection -n "amsterquest_ranker"
+curl -u "a59498fc-0121-404e-967f-ba4b981e672c":"zenQOr8aJEaS" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/rankers/766366x22-rank-979"
+
+curl -u "a59498fc-0121-404e-967f-ba4b981e672c":"zenQOr8aJEaS" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/sca41fad07_3820_45d5_ab7b_d5236ecef47f/solr/amsterquest_collection/fcselect" -d "q=drink&wt=json&fl=Title"
+
+https://a59498fc-0121-404e-967f-ba4b981e672c:zenQOr8aJEaS@gateway.watsonplatform.net/retrieve-and-rank/api/v1/solr_clusters/sca41fad07_3820_45d5_ab7b_d5236ecef47f/solr/amsterquest_collection/fcselect?ranker_id=766366x22-rank-979&q=museum&wt=xml&fl=Trcid,Title
+,Shortdescription,Longdescription,Calendarsummary,TitleEN,ShortdescriptionEN,LongdescriptionEN,CalendarsummaryEN,Types,Ids,Locatienaam,City,Adres,Zipcode,Latitude,Longitude,Urls,Media,Thumbnail,Datepattern_startdate,Datepattern_enddate,Singledates,Type1,Lastupdated
+
+
+##curl -X DELETE -u "a59498fc-0121-404e-967f-ba4b981e672c":"zenQOr8aJEaS" "https://gateway.watsonplatform.net/retrieve-and-rank/api/v1/rankers/766366x22-rank-979"
+
